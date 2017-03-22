@@ -45,6 +45,7 @@ public class FuncoesController implements Serializable{
 	
 	private TreeNode rootNfe;
 	private TreeNode rootCadastros;
+	private TreeNode rootVendas;
 	private TreeNode funcaoSelecionada;
 	private String pagina;
 	private String tituloJanela;
@@ -58,8 +59,7 @@ public class FuncoesController implements Serializable{
         
         rootCadastros = new DefaultTreeNode("root", null);
         
-TreeNode pessoal = new DefaultTreeNode(new Funcao("Pessoal", null), rootCadastros);
-        
+        TreeNode pessoal = new DefaultTreeNode(new Funcao("Pessoal", null), rootCadastros);        
         TreeNode pessoa = new DefaultTreeNode(new Funcao("Pessoa", null), pessoal);
         new DefaultTreeNode("document", new Funcao("Pessoa", "/modulos/cadastros/pessoal/pessoa/pessoa.jsf"), pessoa);
         new DefaultTreeNode("document", new Funcao("Estado Civil", "/modulos/cadastros/pessoal/pessoa/estadoCivil.jsf"), pessoa);
@@ -117,6 +117,16 @@ TreeNode pessoal = new DefaultTreeNode(new Funcao("Pessoal", null), rootCadastro
         new DefaultTreeNode("document", new Funcao("CFOP", "/modulos/cadastros/tabelas/cfop.jsf"), tabelas);
         new DefaultTreeNode("document", new Funcao("Feriados", "/modulos/cadastros/tabelas/feriados.jsf"), tabelas);
         
+        rootVendas = new DefaultTreeNode("root", null);
+        
+        TreeNode vendas = new DefaultTreeNode(new Funcao("Vendas", null), rootVendas);
+        new DefaultTreeNode("document", new Funcao("Tipo de Nota Fiscal", "/modulos/vendas/notaFiscalTipo.jsf"), vendas);
+        new DefaultTreeNode("document", new Funcao("Condições de Pagamento", "/modulos/vendas/condicoesPagamento.jsf"), vendas);
+        new DefaultTreeNode("document", new Funcao("Orçamento", "/modulos/vendas/vendaOrcamentoCabecalho.jsf"), vendas);
+        new DefaultTreeNode("document", new Funcao("Venda", "/modulos/vendas/vendaCabecalho.jsf"), vendas);
+        new DefaultTreeNode("document", new Funcao("Frete", "/modulos/vendas/vendaFrete.jsf"), vendas);
+        new DefaultTreeNode("document", new Funcao("Romaneio de Entrega", "/modulos/vendas/vendaRomaneioEntrega.jsf"), vendas);
+        
     }  
   
     public TreeNode getRootNfe() {  
@@ -125,6 +135,9 @@ TreeNode pessoal = new DefaultTreeNode(new Funcao("Pessoal", null), rootCadastro
     
     public TreeNode getRootCadastros() {
 		return rootCadastros;
+	}
+    public TreeNode getRootVendas() {
+		return rootVendas;
 	}
     
 	public void onNodeSelect(NodeSelectEvent event) {

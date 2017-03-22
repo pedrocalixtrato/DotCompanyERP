@@ -37,6 +37,23 @@
 					</p:treeNode>
 				</p:tree>
 			</p:tab>
+			
+			<p:tab title="Vendas">
+				<p:tree id="treeVendas" selectionMode="single"
+					value="#{funcoesController.rootVendas}" var="fun"
+					style="border: none">
+
+					<p:treeNode expandedIcon="ui-icon-folder-open"
+						collapsedIcon="ui-icon-folder-collapsed">
+						<h:outputText value="#{fun.nome}" />
+					</p:treeNode>
+
+					<p:treeNode type="document" icon="ui-icon-document">
+						<h:link outcome="#{fun.pagina}" value="#{fun.nome}" />
+					</p:treeNode>
+				</p:tree>
+			</p:tab>
+			
 		</p:accordionPanel>
 	</h:form>
 </ui:composition>

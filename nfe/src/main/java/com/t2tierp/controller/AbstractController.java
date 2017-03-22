@@ -82,7 +82,60 @@ public abstract class AbstractController<T> implements Serializable {
 	public HashMap<String, Integer> statusNfe;
 	public HashMap<String, Integer> modalidadeFreteNfe;
 	public HashMap<String, Integer> origemMercadoriaNfe;
-
+	public HashMap<String, String> compraSituacaoCotacao;
+	public HashMap<String, String> compraFormaPagamento;
+	public HashMap<String, String> compraTipoFrete;
+	public HashMap<String, String> tipoNaturazaFinanceira;
+	public HashMap<String, String> layoutRemessa;
+	public HashMap<String, String> especieCobranca;
+	public HashMap<String, String> tipoBaixa;	
+	public HashMap<String, String> metodoDepreciacao;
+	public HashMap<String, String> tipoDepreciacao;
+	public HashMap<String, String> pontoTratamentoHoraMais;
+	public HashMap<String, String> pontoTratamentoHoramenos;
+	public HashMap<String, String> tipoHorarioPonto;
+	public HashMap<String, String> tipoTrabalho;
+	public HashMap<String, String> utilizacaoRelogioPonto;
+	public HashMap<String, String> situacaoBancoHoras;
+	public HashMap<String, String> tipoRegistroPonto;
+	public HashMap<String, String> pontoModalidadeHoraExtra;
+	public HashMap<String, String> pontoHoraCompensar;
+	public HashMap<String, String> origemMercadoria;
+	public HashMap<String, String> tributIcmsBaseCalculo;
+	public HashMap<String, String> tributIcmsStBaseCalculo;
+	public HashMap<String, String> pisModalidadeBaseCalculo;
+	public HashMap<String, String> issModalidadeBaseCalculo;
+	public HashMap<String, String> issCodigoTributacao;
+	public HashMap<String, String> informarContaContabil;
+	public HashMap<String, String> periodicidadeInciceContabil;
+	public HashMap<String, String> tipoPlanoContaSped;
+	public HashMap<String, String> situacaoContaContabil;
+	public HashMap<String, String> naturezaContaContabil;
+	public HashMap<String, String> patrimonioResultadoContaContabil;
+	public HashMap<String, String> dfcContaContabil;
+	public HashMap<String, String> criterioLancamentoFechamento;
+	public HashMap<String, String> tipoLancamentoProgramado;
+	public HashMap<String, String> tipoLancamento;
+	public HashMap<String, String> formaCalculoDre;
+	public HashMap<String, String> sinalDre;
+	public HashMap<String, String> contabilLivroFormaEscrituracao;
+	public HashMap<String, String> aberturaFechamento;
+	public HashMap<String, String> fiscalParametrosApuracao;
+	public HashMap<String, String> fiscalParametrosCalculoPisCofins;
+	public HashMap<String, String> simplesNacionalCabecalho;
+	public HashMap<String, String> fiscalParametrosSimplesAtividade;
+	public HashMap<String, String> spedPerfil;
+	public HashMap<String, String> fiscalParametrosFormaCalculoIss;
+	public HashMap<String, String> aberturaEncerramento;
+	public HashMap<String, String> requisicaoInternaSituacao;
+	public HashMap<String, String> tipoReajuste;
+	public HashMap<String, String> contratoStatusSolicitacaoServico;
+	public HashMap<String, String> vendaOrcamentoTipo;
+	public HashMap<String, String> vendaOrcamentoSituacao;
+	public HashMap<String, String> formaPagamento;
+	public HashMap<String, String> VendaResponsavelFrete;
+	public HashMap<String, String> vendaRomaneioSituacao;
+	
 	@EJB
 	protected InterfaceDAO<T> dao;
 
@@ -288,6 +341,263 @@ public abstract class AbstractController<T> implements Serializable {
 		origemMercadoriaNfe.put("Nacional", 0);
 		origemMercadoriaNfe.put("Estrangeira - Importação direta", 1);
 		origemMercadoriaNfe.put("Estrangeira - Adquirida no mercado interno", 2);
+		
+		compraSituacaoCotacao = new HashMap<>();
+		compraSituacaoCotacao.put("Aberta", "A");
+		compraSituacaoCotacao.put("Confirmada", "C");
+		compraSituacaoCotacao.put("Fechada", "F");
+
+		compraFormaPagamento = new HashMap<>();
+		compraFormaPagamento.put("A Vista", "0");
+		compraFormaPagamento.put("A Prazo", "1");
+		compraFormaPagamento.put("Outros", "2");
+
+		compraTipoFrete = new HashMap<>();
+		compraTipoFrete.put("CIF", "C");
+		compraTipoFrete.put("FOB", "F");
+		
+		tipoNaturazaFinanceira  = new HashMap<>();
+		tipoNaturazaFinanceira.put("Receita", "R");
+		tipoNaturazaFinanceira.put("Despesa", "D");
+		
+		layoutRemessa = new HashMap<>();
+		layoutRemessa.put("240", "240");
+		layoutRemessa.put("400", "400");
+		
+		especieCobranca = new HashMap<>();
+		especieCobranca.put("Duplicata Mercantil", "DM");
+		especieCobranca.put("Duplicata de Serviços", "DS");
+		especieCobranca.put("Recibo", "RC");
+		especieCobranca.put("Nota Promissória", "NP");
+
+		tipoBaixa = new HashMap<>();
+		tipoBaixa.put("Total", "T");
+		tipoBaixa.put("Parcial", "P");
+
+		metodoDepreciacao = new HashMap<>();
+		metodoDepreciacao.put("Linear", "1");
+		metodoDepreciacao.put("Soma dos Algarismos dos Anos", "2");
+		metodoDepreciacao.put("Horas de Trabalho", "3");
+		metodoDepreciacao.put("Unidades Produzidas", "4");
+
+		tipoDepreciacao = new HashMap<>();
+		tipoDepreciacao.put("Normal", "N");
+		tipoDepreciacao.put("Acelerada", "A");
+		tipoDepreciacao.put("Incentivada", "I");
+		
+		pontoTratamentoHoraMais = new HashMap<>();
+		pontoTratamentoHoraMais.put("Banco de Horas", "B");
+		pontoTratamentoHoraMais.put("Pagar como Extra", "E");
+
+		pontoTratamentoHoramenos = new HashMap<>();
+		pontoTratamentoHoramenos.put("Banco de Horas", "B");
+		pontoTratamentoHoramenos.put("Descontar como Falta", "F");
+
+		tipoHorarioPonto = new HashMap<>();
+		tipoHorarioPonto.put("Fixo", "F");
+		tipoHorarioPonto.put("Diário", "D");
+		tipoHorarioPonto.put("Semanal", "S");
+		tipoHorarioPonto.put("Mensal", "M");
+
+		tipoTrabalho = new HashMap<>();
+		tipoTrabalho.put("Normal", "N");
+		tipoTrabalho.put("Compensação", "C");
+		tipoTrabalho.put("Folga", "F");
+		
+		utilizacaoRelogioPonto = new HashMap<>();
+		utilizacaoRelogioPonto.put("Ponto", "P");
+		utilizacaoRelogioPonto.put("Refeitório", "R");
+		utilizacaoRelogioPonto.put("Circulação", "C");
+		
+		situacaoBancoHoras = new HashMap<>();
+		situacaoBancoHoras.put("Não Utilizado", "N");
+		situacaoBancoHoras.put("Utilizado", "U");
+		situacaoBancoHoras.put("Utilizado Parcialmente", "P");
+		
+		tipoRegistroPonto = new HashMap<>();
+		tipoRegistroPonto.put("Original", "O");
+		tipoRegistroPonto.put("Incluído por Digitação", "I");
+		tipoRegistroPonto.put("Intervalo Pré-assinalado", "P");
+		
+		pontoModalidadeHoraExtra = new HashMap<>();
+		pontoModalidadeHoraExtra.put("Diurna", "D");
+		pontoModalidadeHoraExtra.put("Noturna", "N");
+		
+		pontoHoraCompensar = new HashMap<>();
+		pontoModalidadeHoraExtra.put("Horas a mais", "1");
+		pontoModalidadeHoraExtra.put("Horas a Menos", "2");
+		
+		origemMercadoria = new HashMap<>();
+		origemMercadoria.put("Nacional", "0");
+		origemMercadoria.put("Estrangeira - Importação direta", "1");
+		origemMercadoria.put("Estrangeira - Adquirida no mercado interno", "2");
+		
+		tributIcmsBaseCalculo = new HashMap<>();
+		tributIcmsBaseCalculo.put("Margem Valor Agregado (%)", "0");
+		tributIcmsBaseCalculo.put("Pauta (Valor)", "1");
+		tributIcmsBaseCalculo.put("Preço Tabelado Máx. (valor)", "2");
+		tributIcmsBaseCalculo.put("Valor da Operação", "3");
+		
+		tributIcmsStBaseCalculo = new HashMap<>();
+		tributIcmsStBaseCalculo.put("Preço tabelado ou máximo sugerido", "0");
+		tributIcmsStBaseCalculo.put("Lista Negativa (valor)", "1");
+		tributIcmsStBaseCalculo.put("Lista Positiva (valor)", "2");
+		tributIcmsStBaseCalculo.put("Lista Neutra (valor)", "3");
+		tributIcmsStBaseCalculo.put("Margem Valor Agregado(%)", "4");
+		tributIcmsStBaseCalculo.put("Pauta (valor)", "5");
+		
+		pisModalidadeBaseCalculo = new HashMap<>();
+		pisModalidadeBaseCalculo.put("Percentual", "0");
+		pisModalidadeBaseCalculo.put("Unidade", "0");
+		
+		issModalidadeBaseCalculo = new HashMap<>();
+		issModalidadeBaseCalculo.put("Valor Operação", "0");
+		issModalidadeBaseCalculo.put("Outros", "9");
+		
+		issCodigoTributacao = new HashMap<>();
+		issCodigoTributacao.put("Normal", "N");
+		issCodigoTributacao.put("Retida", "R");
+		issCodigoTributacao.put("Substituta", "S");
+		issCodigoTributacao.put("Isenta", "I");
+		
+		informarContaContabil = new HashMap<>();
+		informarContaContabil.put("Código", "C");
+		informarContaContabil.put("Máscara", "M");
+		
+		periodicidadeInciceContabil = new HashMap<>();
+		periodicidadeInciceContabil.put("Diário", "D");
+		periodicidadeInciceContabil.put("Mensal", "M");
+		
+		tipoPlanoContaSped = new HashMap<>();
+		tipoPlanoContaSped.put("Sintética", "S");
+		tipoPlanoContaSped.put("Análitica", "A");
+		
+		situacaoContaContabil = new HashMap<>();
+		situacaoContaContabil.put("Ativa", "A");
+		situacaoContaContabil.put("Inativa", "I");
+		
+		naturezaContaContabil = new HashMap<>();
+		naturezaContaContabil.put("Credora", "C");
+		naturezaContaContabil.put("Devedora", "D");
+		
+		patrimonioResultadoContaContabil = new HashMap<>();
+		patrimonioResultadoContaContabil.put("Patrimônio", "P");
+		patrimonioResultadoContaContabil.put("Resultado", "R");
+		
+		dfcContaContabil = new HashMap<>();
+		dfcContaContabil.put("Não participa", "N");
+		dfcContaContabil.put("Atividades Operacionais", "O");
+		dfcContaContabil.put("Atividades de Financiamento", "F");
+		dfcContaContabil.put("Atividades de Investimento", "I");
+		
+		criterioLancamentoFechamento = new HashMap<>();
+		criterioLancamentoFechamento.put("Livre", "L");
+		criterioLancamentoFechamento.put("Avisar", "A");
+		criterioLancamentoFechamento.put("Não permitir (para lançamentos efetuados fora do período informado)", "N");
+
+		tipoLancamentoProgramado = new HashMap<>();
+		tipoLancamentoProgramado.put("Um Débito para Vários Créditos", "UDVC");
+		tipoLancamentoProgramado.put("Um Crédito para Vários Débitos", "UCVD");
+		tipoLancamentoProgramado.put("Um Débito para Um Crédito", "UDUC");
+		tipoLancamentoProgramado.put("Vários Débitos para Vários Créditos", "VDVC");
+
+		tipoLancamento = new HashMap<>();
+		tipoLancamento.put("Crédito", "C");
+		tipoLancamento.put("Débito", "D");
+		
+		formaCalculoDre = new HashMap<>();
+		formaCalculoDre.put("Sintética [soma contas filhas - sinal de mais ou de menos]", "S");
+		formaCalculoDre.put("Vinculada [vinculada a conta do balancete - recupera o sinal da conta mãe]", "V");
+		formaCalculoDre.put("Resultado de Operações da DRE [soma das operações - sinal de igual]", "R");
+		
+		sinalDre = new HashMap<>();
+		sinalDre.put("+", "+");
+		sinalDre.put("-", "-");
+		sinalDre.put("=", "=");
+		
+		contabilLivroFormaEscrituracao = new HashMap<>();
+		contabilLivroFormaEscrituracao.put("Diário Geral", "G");
+		contabilLivroFormaEscrituracao.put("Diário com Escrituração Resumida", "R");
+		contabilLivroFormaEscrituracao.put("Diário Auxiliar", "A");
+		contabilLivroFormaEscrituracao.put("Razão Auxiliar", "Z");
+		contabilLivroFormaEscrituracao.put("Livro de Balancetes Diários e Balanços", "B");
+		
+		aberturaFechamento = new HashMap<>();
+		aberturaFechamento.put("Abertura", "A");
+		aberturaFechamento.put("Fechamento", "F");
+		
+		fiscalParametrosApuracao = new HashMap<>();
+		fiscalParametrosApuracao.put("Regime Competencia", "1");
+		fiscalParametrosApuracao.put("Regime de Caixa", "2");
+		
+		fiscalParametrosCalculoPisCofins = new HashMap<>();
+		fiscalParametrosCalculoPisCofins.put("Alíquota Básica", "AB");
+		fiscalParametrosCalculoPisCofins.put("Alíquota Diferenciada", "AD");
+		fiscalParametrosCalculoPisCofins.put("Unidade de Medida de Produto", "UP");
+		
+		simplesNacionalCabecalho = new HashMap<>();
+		simplesNacionalCabecalho.put("Federal", "1");
+		simplesNacionalCabecalho.put("Estadual", "2");
+		
+		fiscalParametrosSimplesAtividade = new HashMap<>();
+		fiscalParametrosSimplesAtividade.put("Comercio", "CO");
+		fiscalParametrosSimplesAtividade.put("Indústria", "IN");
+		fiscalParametrosSimplesAtividade.put("Serviços Anexo III", "S1");
+		fiscalParametrosSimplesAtividade.put("Serviços Anexo IV", "S2");
+		fiscalParametrosSimplesAtividade.put("Serviços Anexo V", "S3");
+		
+		spedPerfil = new HashMap<>();
+		spedPerfil.put("A", "A");
+		spedPerfil.put("B", "B");
+		spedPerfil.put("C", "C");
+		
+		fiscalParametrosFormaCalculoIss = new HashMap<>();
+		fiscalParametrosFormaCalculoIss.put("Normal", "NO");
+		fiscalParametrosFormaCalculoIss.put("Profissional Habilitado", "PH");
+		fiscalParametrosFormaCalculoIss.put("Valor Fixo", "VF");
+		
+		aberturaEncerramento = new HashMap<>();
+		aberturaEncerramento.put("Abertura", "A");
+		aberturaEncerramento.put("Encerramento", "E");
+		
+		requisicaoInternaSituacao = new HashMap<>();
+		requisicaoInternaSituacao.put("Aberta", "A");
+		requisicaoInternaSituacao.put("Deferida", "D");
+		requisicaoInternaSituacao.put("Indeferida", "I");
+		
+		tipoReajuste = new HashMap<>();
+		tipoReajuste.put("Aumentar", "A");
+		tipoReajuste.put("Diminuir", "D");
+		
+		contratoStatusSolicitacaoServico = new HashMap<>();
+		contratoStatusSolicitacaoServico.put("Aguardando", "A");
+		contratoStatusSolicitacaoServico.put("Deferido", "D");
+		contratoStatusSolicitacaoServico.put("Indeferido", "I");
+		
+		vendaOrcamentoTipo = new HashMap<>();
+		vendaOrcamentoTipo.put("Orçamento", "O");
+		vendaOrcamentoTipo.put("Pedido", "P");
+		
+		vendaOrcamentoSituacao = new HashMap<>();
+		vendaOrcamentoSituacao.put("Digitacao", "D");
+		vendaOrcamentoSituacao.put("Producao", "P");
+		vendaOrcamentoSituacao.put("Expedicao", "X");
+		vendaOrcamentoSituacao.put("Faturado", "F");
+		vendaOrcamentoSituacao.put("Entregue", "E");
+		
+		formaPagamento = new HashMap<>();
+		formaPagamento.put("0 - A Vista", "0");
+		formaPagamento.put("1 - A Prazo", "1");
+		formaPagamento.put("2 - Outros", "2");
+
+		VendaResponsavelFrete = new HashMap<>();
+		VendaResponsavelFrete.put("Emitente", "1");
+		VendaResponsavelFrete.put("Destinatário", "2");
+		
+		vendaRomaneioSituacao = new HashMap<>();
+		vendaRomaneioSituacao.put("Aberto", "A");
+		vendaRomaneioSituacao.put("Trânsito", "T");
+		vendaRomaneioSituacao.put("Encerrado", "E");
 	}
 
 	/* https://java.net/jira/browse/JAVASERVERFACES-1808 */
@@ -537,6 +847,222 @@ public abstract class AbstractController<T> implements Serializable {
 
 	public HashMap<String, Integer> getOrigemMercadoriaNfe() {
 		return origemMercadoriaNfe;
+	}
+
+	public HashMap<String, String> getCompraSituacaoCotacao() {
+		return compraSituacaoCotacao;
+	}
+
+	public HashMap<String, String> getCompraFormaPagamento() {
+		return compraFormaPagamento;
+	}
+
+	public HashMap<String, String> getCompraTipoFrete() {
+		return compraTipoFrete;
+	}
+
+	public HashMap<String, String> getTipoBaixa() {
+		return tipoBaixa;
+	}
+
+	public HashMap<String, String> getTipoNaturazaFinanceira() {
+		return tipoNaturazaFinanceira;
+	}
+
+	public HashMap<String, String> getLayoutRemessa() {
+		return layoutRemessa;
+	}
+
+	public HashMap<String, String> getEspecieCobranca() {
+		return especieCobranca;
+	}
+
+	public HashMap<String, String> getTipoDepreciacao() {
+		return tipoDepreciacao;
+	}
+
+	public HashMap<String, String> getMetodoDepreciacao() {
+		return metodoDepreciacao;
+	}
+
+	public HashMap<String, String> getPontoTratamentoHoraMais() {
+		return pontoTratamentoHoraMais;
+	}
+
+	public HashMap<String, String> getPontoTratamentoHoramenos() {
+		return pontoTratamentoHoramenos;
+	}
+
+	public HashMap<String, String> getTipoHorarioPonto() {
+		return tipoHorarioPonto;
+	}
+
+	public HashMap<String, String> getTipoTrabalho() {
+		return tipoTrabalho;
+	}
+
+	public HashMap<String, String> getUtilizacaoRelogioPonto() {
+		return utilizacaoRelogioPonto;
+	}
+
+	public HashMap<String, String> getSituacaoBancoHoras() {
+		return situacaoBancoHoras;
+	}
+
+	public HashMap<String, String> getTipoRegistroPonto() {
+		return tipoRegistroPonto;
+	}
+
+	public HashMap<String, String> getPontoModalidadeHoraExtra() {
+		return pontoModalidadeHoraExtra;
+	}
+
+	public HashMap<String, String> getPontoHoraCompensar() {
+		return pontoHoraCompensar;
+	}
+
+	public HashMap<String, String> getOrigemMercadoria() {
+		return origemMercadoria;
+	}
+
+	public HashMap<String, String> getTributIcmsBaseCalculo() {
+		return tributIcmsBaseCalculo;
+	}
+
+	public HashMap<String, String> getTributIcmsStBaseCalculo() {
+		return tributIcmsStBaseCalculo;
+	}
+
+	public HashMap<String, String> getPisModalidadeBaseCalculo() {
+		return pisModalidadeBaseCalculo;
+	}
+
+	public HashMap<String, String> getIssModalidadeBaseCalculo() {
+		return issModalidadeBaseCalculo;
+	}
+
+	public HashMap<String, String> getIssCodigoTributacao() {
+		return issCodigoTributacao;
+	}
+
+	public HashMap<String, String> getInformarContaContabil() {
+		return informarContaContabil;
+	}
+
+	public HashMap<String, String> getPeriodicidadeInciceContabil() {
+		return periodicidadeInciceContabil;
+	}
+
+	public HashMap<String, String> getTipoPlanoContaSped() {
+		return tipoPlanoContaSped;
+	}
+
+	public HashMap<String, String> getSituacaoContaContabil() {
+		return situacaoContaContabil;
+	}
+
+	public HashMap<String, String> getNaturezaContaContabil() {
+		return naturezaContaContabil;
+	}
+
+	public HashMap<String, String> getPatrimonioResultadoContaContabil() {
+		return patrimonioResultadoContaContabil;
+	}
+
+	public HashMap<String, String> getDfcContaContabil() {
+		return dfcContaContabil;
+	}
+
+	public HashMap<String, String> getCriterioLancamentoFechamento() {
+		return criterioLancamentoFechamento;
+	}
+
+	public HashMap<String, String> getTipoLancamentoProgramado() {
+		return tipoLancamentoProgramado;
+	}
+
+	public HashMap<String, String> getTipoLancamento() {
+		return tipoLancamento;
+	}
+
+	public HashMap<String, String> getFormaCalculoDre() {
+		return formaCalculoDre;
+	}
+
+	public HashMap<String, String> getSinalDre() {
+		return sinalDre;
+	}
+
+	public HashMap<String, String> getContabilLivroFormaEscrituracao() {
+		return contabilLivroFormaEscrituracao;
+	}
+
+	public void setContabilLivroFormaEscrituracao(HashMap<String, String> contabilLivroFormaEscrituracao) {
+		this.contabilLivroFormaEscrituracao = contabilLivroFormaEscrituracao;
+	}
+
+	public HashMap<String, String> getAberturaFechamento() {
+		return aberturaFechamento;
+	}
+
+	public HashMap<String, String> getFiscalParametrosApuracao() {
+		return fiscalParametrosApuracao;
+	}
+
+	public HashMap<String, String> getFiscalParametrosCalculoPisCofins() {
+		return fiscalParametrosCalculoPisCofins;
+	}
+
+	public HashMap<String, String> getSimplesNacionalCabecalho() {
+		return simplesNacionalCabecalho;
+	}
+
+	public HashMap<String, String> getFiscalParametrosSimplesAtividade() {
+	    return fiscalParametrosSimplesAtividade;
+	}
+	
+	public HashMap<String, String> getSpedPerfil() {
+	    return spedPerfil;
+	}
+
+	public HashMap<String, String> getFiscalParametrosFormaCalculoIss() {
+	    return fiscalParametrosFormaCalculoIss;
+	}
+
+	public HashMap<String, String> getAberturaEncerramento() {
+	    return aberturaEncerramento;
+	}
+
+	public HashMap<String, String> getRequisicaoInternaSituacao() {
+		return requisicaoInternaSituacao;
+	}
+
+	public HashMap<String, String> getTipoReajuste() {
+	    return tipoReajuste;
+	}
+
+	public HashMap<String, String> getContratoStatusSolicitacaoServico() {
+	    return contratoStatusSolicitacaoServico;
+	}
+
+	public HashMap<String, String> getVendaOrcamentoTipo() {
+	    return vendaOrcamentoTipo;
+	}
+
+	public HashMap<String, String> getVendaOrcamentoSituacao() {
+	    return vendaOrcamentoSituacao;
+	}
+
+	public HashMap<String, String> getFormaPagamento() {
+	    return formaPagamento;
+	}
+
+	public HashMap<String, String> getVendaResponsavelFrete() {
+	    return VendaResponsavelFrete;
+	}
+
+	public HashMap<String, String> getVendaRomaneioSituacao() {
+	    return vendaRomaneioSituacao;
 	}
 	
 }

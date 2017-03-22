@@ -28,20 +28,26 @@
 */
 package com.t2tierp.model.bean.vendas;
 
-import com.t2tierp.model.bean.cadastros.Colaborador;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.t2tierp.model.bean.cadastros.Colaborador;
 
 
 @Entity
@@ -75,6 +81,8 @@ public class VendaRomaneioEntrega implements Serializable {
     @JoinColumn(name = "ID_COLABORADOR", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Colaborador colaborador;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vendaRomaneioEntrega", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<VendaCabecalho> listaVendaCabecalho;
 
     public VendaRomaneioEntrega() {
     }
@@ -155,5 +163,13 @@ public class VendaRomaneioEntrega implements Serializable {
     public String toString() {
         return "com.t2tierp.model.bean.vendas.VendaRomaneioEntrega[id=" + id + "]";
     }
+
+	public Set<VendaCabecalho> getListaVendaCabecalho() {
+		return listaVendaCabecalho;
+	}
+
+	public void setListaVendaCabecalho(Set<VendaCabecalho> listaVendaCabecalho) {
+		this.listaVendaCabecalho = listaVendaCabecalho;
+	}
 
 }

@@ -28,22 +28,31 @@
 */
 package com.t2tierp.model.bean.vendas;
 
-import com.t2tierp.model.bean.cadastros.Empresa;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
+import com.t2tierp.model.bean.cadastros.Empresa;
 
 
 @Entity
-@Table(name = "VENDA_CONDICOES_PAGAMENTO")
+@Table(name = "CONDICOES_PAGAMENTO")
 public class CondicoesPagamento implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,7 +80,10 @@ public class CondicoesPagamento implements Serializable {
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Empresa empresa;
-
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "condicoesPagamento", cascade = CascadeType.ALL, orphanRemoval = true)			
+	@LazyCollection(LazyCollectionOption.FALSE)
+	private List<VendaCondicoesParcelas> listaVendaCondicoesParcelas;
+		
     public CondicoesPagamento() {
     }
 
@@ -159,5 +171,13 @@ public class CondicoesPagamento implements Serializable {
     public String toString() {
         return "com.t2tierp.model.bean.vendas.CondicoesPagamento[id=" + id + "]";
     }
+
+	public List<VendaCondicoesParcelas> getListaVendaCondicoesParcelas() {
+		return listaVendaCondicoesParcelas;
+	}
+
+	public void setListaVendaCondicoesParcelas(List<VendaCondicoesParcelas> listaVendaCondicoesParcelas) {
+		this.listaVendaCondicoesParcelas = listaVendaCondicoesParcelas;
+	}
 
 }

@@ -28,23 +28,29 @@
 */
 package com.t2tierp.model.bean.vendas;
 
-import com.t2tierp.model.bean.cadastros.Cliente;
-import com.t2tierp.model.bean.cadastros.Transportadora;
-import com.t2tierp.model.bean.cadastros.Vendedor;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Set;
+
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.t2tierp.model.bean.cadastros.Cliente;
+import com.t2tierp.model.bean.cadastros.Transportadora;
+import com.t2tierp.model.bean.cadastros.Vendedor;
 
 
 @Entity
@@ -116,6 +122,8 @@ public class VendaCabecalho implements Serializable {
     @JoinColumn(name = "ID_VENDA_ROMANEIO_ENTREGA", referencedColumnName = "ID")
     @ManyToOne
     private VendaRomaneioEntrega vendaRomaneioEntrega;
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "vendaCabecalho", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<VendaDetalhe> listaVendaDetalhe;
 
     public VendaCabecalho() {
     }
@@ -332,5 +340,13 @@ public class VendaCabecalho implements Serializable {
     public String toString() {
         return "com.t2tierp.model.bean.vendas.VendaCabecalho[id=" + id + "]";
     }
+
+	public Set<VendaDetalhe> getListaVendaDetalhe() {
+		return listaVendaDetalhe;
+	}
+
+	public void setListaVendaDetalhe(Set<VendaDetalhe> listaVendaDetalhe) {
+		this.listaVendaDetalhe = listaVendaDetalhe;
+	}
 
 }
