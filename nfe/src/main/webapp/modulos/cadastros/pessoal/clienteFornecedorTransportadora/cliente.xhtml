@@ -154,18 +154,7 @@
 								required="true" style="width: 100%" />
 						</div>
 
-						<div class="t2ti-campo-50">
-							<p:outputLabel value="Contabil Conta" for="clienteContabilConta" />
-							<br />
-							<p:autoComplete id="clienteContabilConta"
-								value="#{clienteController.objeto.contabilConta}"
-								completeMethod="#{clienteController.getListaContabilConta}"
-								var="contabilConta" itemLabel="#{contabilConta.descricao}"
-								itemValue="#{contabilConta}"
-								converter="com.t2tierp.model.bean.converter.defaultConverter"
-								forceSelection="true" minQueryLength="3" maxResults="100"
-								required="false" style="width: 100%" />
-						</div>
+						
 						<div class="t2ti-campo-50">
 							<p:outputLabel value="Operacao Fiscal"
 								for="clienteOperacaoFiscal" />

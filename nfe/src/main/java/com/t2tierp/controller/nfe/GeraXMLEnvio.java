@@ -286,7 +286,7 @@ public class GeraXMLEnvio {
 			}
 
 		} else {
-			dest.setIndIEDest("2");
+			dest.setIndIEDest("9");
 			// dest.setIE("ISENTO");
 		}
 		dest.setISUF(destinatario.getSuframa() == null ? null : String.valueOf(destinatario.getSuframa()));

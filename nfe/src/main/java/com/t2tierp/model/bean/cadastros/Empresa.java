@@ -34,6 +34,7 @@ import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -129,7 +130,7 @@ public class Empresa implements Serializable {
     @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
     @ManyToOne
     private Empresa empresa;
-    @OneToMany(mappedBy="empresa", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy="empresa", fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<EmpresaEndereco> listaEndereco;
     @ManyToMany(fetch=FetchType.LAZY, mappedBy = "listaEmpresa")
     private Set<Pessoa> listaPessoa;

@@ -1,0 +1,330 @@
+<!--
+/*
+* The MIT License
+* 
+* Copyright: Copyright (C) 2014 T2Ti.COM
+* 
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+* 
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+* 
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+* THE SOFTWARE.
+* 
+* The author may be contacted at: t2ti.com@gmail.com
+*
+* @author Claudio de Barros (T2Ti.com)
+* @version 2.0
+*/
+-->
+<ui:composition template="/WEB-INF/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:t2ti="http://java.sun.com/jsf/composite/t2ti">
+
+	<ui:define name="gridDados">
+		<p:panel style="border: none" header="Empresa"
+			rendered="#{!empresaController.podeConsultar()}">
+			<p:outputLabel value="Você não possui acesso a esta função" />
+		</p:panel>
+
+		<p:outputPanel id="outputPanelGrid">
+			<p:outputPanel rendered="#{empresaController.telaGrid}">
+				<p:panel id="panelCentroGrid" style="border: none" header="Empresa"
+					rendered="#{empresaController.podeConsultar()}">
+
+					<p:dataTable id="dataTableEmrpresa" var="obj"
+						value="#{empresaController.dataModel}" paginator="true" rows="10"
+						rowsPerPageTemplate="5,10,15,20"
+						selection="#{empresaController.objetoSelecionado}"
+						selectionMode="single" resizableColumns="true" lazy="true">
+
+						<f:facet name="header">
+							<p:commandButton title="Novo" icon="ui-icon-plus"
+								actionListener="#{empresaController.incluir}"
+								rendered="false"
+								disabled="#{!empresaController.podeInserir()}"
+								update=":form1:outputPanelGrid,:form1:outputPanelDetalhe" />
+							<p:commandButton process="dataTableEmrpresa" title="Detalhes"
+								icon="ui-icon-zoomin"
+								actionListener="#{empresaController.alterar()}"
+								update=":form1:outputPanelGrid,:form1:outputPanelDetalhe" />
+							<p:commandButton process="dataTableEmrpresa" title="Excluir"
+								icon="ui-icon-trash"
+								actionListener="#{empresaController.excluir}"
+								rendered="false"
+								disabled="#{!empresaController.podeExcluir()}"
+								update=":form1:outputPanelGrid,:form1:outputPanelDetalhe">
+								<p:confirm header="Confirmação" message="Confirma Exclusão?"
+									icon="ui-icon-alert" />
+							</p:commandButton>
+						</f:facet>
+
+						<p:column headerText="Razão Social" width="150">
+							<h:outputLabel value="#{obj.razaoSocial}"/>
+						</p:column>
+						
+						<p:column headerText="CNPJ" width="100">
+							<h:outputLabel value="#{obj.cnpj}" />
+						</p:column>		
+						
+						<p:column headerText="Inscrição Estadual" width="100">
+							<h:outputLabel value="#{obj.inscricaoEstadual}" />
+						</p:column>	
+						
+						<p:column>
+							<p:commandButton process="dataTableEmrpresa" title="Detalhes"
+								icon="ui-icon-zoomin"
+								actionListener="#{empresaController.alterar()}"
+								update=":form1:outputPanelGrid,:form1:outputPanelDetalhe" />
+						</p:column>				
+						
+					</p:dataTable>
+				</p:panel>
+			</p:outputPanel>
+		</p:outputPanel>
+
+	</ui:define>
+
+	<ui:define name="telaInclusaoAlteracao">
+
+		<p:outputPanel id="outputPanelDetalhe">
+			<p:outputPanel rendered="#{!empresaController.telaGrid}">
+				<p:panel id="panelCentroDetalhe" style="border: none"
+					header="Empresa">
+
+					<p:outputLabel value="Nenhum registro selecionado."
+						rendered="#{empty empresaController.objeto}" />
+					<p:commandButton value="Voltar"
+						actionListener="#{empresaController.voltar()}"
+						rendered="#{empty empresaController.objeto}"
+						update=":form1:outputPanelGrid,:form1:outputPanelDetalhe" />
+
+					<p:outputPanel rendered="#{not empty empresaController.objeto}">
+
+						<p:tabView id="telasCadastroEmpresa" style="border: 0px;">
+							<p:tab title="Informações da Empresa">
+								<t2ti:campoTexto styleClass="t2ti-campo-80"
+									idComponente="empresaNome" label="Razão Social"
+									nomeAtributo="#{empresaController.objeto.razaoSocial}"
+									tamanhoMaximo="150" requerido="true" />								
+
+								<t2ti:campoTexto styleClass="t2ti-campo-50"
+									idComponente="empresaNomeFantasia" label="Nome Fantasia"
+									nomeAtributo="#{empresaController.objeto.nomeFantasia}"
+									tamanhoMaximo="250" />
+									
+								<t2ti:campoTexto styleClass="t2ti-campo-20"
+									idComponente="empresaJuridicaCnpj" label="Cnpj"
+									nomeAtributo="#{empresaController.objeto.cnpj}"
+									tamanhoMaximo="30" />							
+								
+								<t2ti:campoTexto styleClass="t2ti-campo-30"
+									idComponente="empresaJuridicaInscricaoEstadual"
+									label="Inscricao Estadual"
+									nomeAtributo="#{empresaController.objeto.inscricaoEstadual}"
+									tamanhoMaximo="30" />
+									
+								<t2ti:campoData styleClass="t2ti-campo-20"
+									idComponente="empresaJuridicaDataConstituicao"
+									label="Data Cadastro"
+									nomeAtributo="#{empresaController.objeto.dataCadastro}" />
+
+								<t2ti:campoSelect styleClass="t2ti-campo-30"
+									idComponente="empresaJuridicaCrt" label="Crt"
+									nomeAtributo="#{empresaController.objeto.crt}"
+									itens="#{empresaController.crt}" />
+									
+								<t2ti:campoTexto styleClass="t2ti-campo-30"
+									idComponente="empresaJCodIbge"
+									label="Codigo IBGE cidade"
+									nomeAtributo="#{empresaController.objeto.codigoIbgeCidade}"
+									tamanhoMaximo="30" />
+									
+								<t2ti:campoTexto styleClass="t2ti-campo-20"
+									idComponente="codIbgeUF"
+									label="Codigo IBGE UF"
+									nomeAtributo="#{empresaController.objeto.codigoIbgeUf}"
+									tamanhoMaximo="10" />
+									
+									</p:tab>
+									<p:tab title="Endereços"
+								disabled="#{empty empresaController.objeto.id}">
+
+								<p:dataTable id="dataTableEmpresaEndereco" var="obj"
+									value="#{empresaController.objeto.listaEndereco}"
+									paginator="true" rows="10" rowsPerPageTemplate="5,10,15,20"
+									selection="#{empresaController.empresaEnderecoSelecionado}"
+									selectionMode="single" rowKey="#{obj.id}">
+
+									<f:facet name="header">
+										<p:commandButton title="Novo" icon="ui-icon-plus"
+											actionListener="#{empresaController.incluirEndereco()}"
+											oncomplete="PF('dialogEndereco').show()"
+											update=":formOutrasTelas2:panelEmpresaEndereco,dataTableEmpresaEndereco" />
+										<p:commandButton process="dataTableEmpresaEndereco"
+											title="Detalhes" icon="ui-icon-zoomin"
+											actionListener="#{empresaController.alterarEndereco}"
+											oncomplete="PF('dialogEndereco').show()"
+											update=":formOutrasTelas2:panelEmpresaEndereco,:formOutrasTelas2:dialogEndereco" />
+										<p:commandButton process="dataTableEmpresaEndereco"
+											title="Excluir" icon="ui-icon-trash"
+											update="dataTableEmpresaEndereco"
+											actionListener="#{empresaController.excluirEndereco}">
+											<p:confirm header="Confirmação" message="Confirma Exclusão?"
+												icon="ui-icon-alert" />
+										</p:commandButton>
+									</f:facet>
+
+									<p:column headerText="Cidade">
+										<h:outputLabel value="#{obj.cidade}" />
+									</p:column>
+									<p:column headerText="Uf">
+										<h:outputLabel value="#{obj.uf}" />
+									</p:column>
+									<p:column headerText="Fone">
+										<h:outputLabel value="#{obj.fone}" />
+									</p:column>
+									<p:column headerText="Principal">
+										<h:outputLabel
+											value="#{empresaController.keyFromValue(empresaController.simNao, obj.principal)}" />
+									</p:column>
+									<p:column headerText="Entrega">
+										<h:outputLabel
+											value="#{empresaController.keyFromValue(empresaController.simNao, obj.entrega)}" />
+									</p:column>
+									<p:column headerText="Cobranca">
+										<h:outputLabel
+											value="#{empresaController.keyFromValue(empresaController.simNao, obj.cobranca)}" />
+									</p:column>
+									<p:column headerText="Correspondencia">
+										<h:outputLabel
+											value="#{empresaController.keyFromValue(empresaController.simNao, obj.correspondencia)}" />
+									</p:column>
+
+								</p:dataTable>
+
+							</p:tab>
+								</p:tabView>
+								</p:outputPanel>
+								</p:panel>
+								</p:outputPanel>
+
+								<p:outputPanel rendered="#{not empty empresaController.objeto}"
+									styleClass="t2ti-campo-100">
+
+									<p:commandButton value="Incluir"
+										rendered="#{empty empresaController.objeto.id}"
+										actionListener="#{empresaController.salvar()}"
+										update=":form1:growl,:form1:outputPanelGrid,:form1:outputPanelDetalhe"
+										disabled="#{!empresaController.podeInserir()}" />
+									<p:commandButton value="Alterar"
+										rendered="#{not empty empresaController.objeto.id}"
+										actionListener="#{empresaController.salvar()}"
+										update=":form1:growl,:form1:outputPanelGrid,:form1:outputPanelDetalhe"
+										disabled="#{!empresaController.podeAlterar()}" />
+									<p:commandButton value="Fechar"
+										actionListener="#{empresaController.voltar()}"
+										update=":form1:outputPanelGrid,:form1:outputPanelDetalhe" 
+										process="@this" />
+
+								</p:outputPanel>
+					</p:outputPanel>		
+	</ui:define>
+	
+	<ui:define name="outrasTelas2">
+		<h:form id="formOutrasTelas2">
+			<p:dialog id="dialogEndereco" header="Inclusão/Alteração de Endereço"
+				widgetVar="dialogEndereco" showEffect="slide" hideEffect="slide"
+				resizable="true" modal="true" closable="false">
+
+				<p:outputPanel id="panelEmpresaEndereco">
+
+					<t2ti:campoTexto styleClass="t2ti-campo-80"
+						idComponente="empresaEnderecoLogradouro" label="Logradouro"
+						nomeAtributo="#{empresaController.empresaEndereco.logradouro}"
+						tamanhoMaximo="60" />
+					<t2ti:campoTexto styleClass="t2ti-campo-20"
+						idComponente="empresaEnderecoNumero" label="Numero"
+						nomeAtributo="#{empresaController.empresaEndereco.numero}"
+						tamanhoMaximo="10" />
+
+					<t2ti:campoTexto styleClass="t2ti-campo-50"
+						idComponente="empresaEnderecoComplemento" label="Complemento"
+						nomeAtributo="#{empresaController.empresaEndereco.complemento}"
+						tamanhoMaximo="60" />
+					<t2ti:campoTexto styleClass="t2ti-campo-50"
+						idComponente="empresaEnderecoBairro" label="Bairro"
+						nomeAtributo="#{empresaController.empresaEndereco.bairro}"
+						tamanhoMaximo="60" />
+
+					<t2ti:campoTexto styleClass="t2ti-campo-40"
+						idComponente="empresaEnderecoCidade" label="Cidade"
+						nomeAtributo="#{empresaController.empresaEndereco.cidade}"
+						tamanhoMaximo="60" />
+					<t2ti:campoMascara styleClass="t2ti-campo-20"
+						idComponente="empresaEnderecoCep" label="Cep"
+						nomeAtributo="#{empresaController.empresaEndereco.cep}"
+						mascara="99.999-999" />
+					<t2ti:campoTexto styleClass="t2ti-campo-10"
+						idComponente="empresaEnderecoUf" label="Uf"
+						nomeAtributo="#{empresaController.empresaEndereco.uf}"
+						tamanhoMaximo="2" />
+					<t2ti:campoInteiro styleClass="t2ti-campo-30"
+						idComponente="empresaEnderecoMunicipioIbge" label="Municipio Ibge"
+						nomeAtributo="#{empresaController.empresaEndereco.municipioIbge}" />
+
+					<t2ti:campoTexto styleClass="t2ti-campo-20"
+						idComponente="empresaEnderecoFone" label="Fone"
+						nomeAtributo="#{empresaController.empresaEndereco.fone}"
+						tamanhoMaximo="14" />
+					<t2ti:campoSelect styleClass="t2ti-campo-20"
+						idComponente="empresaEnderecoPrincipal" label="Principal"
+						nomeAtributo="#{empresaController.empresaEndereco.principal}"
+						itens="#{empresaController.simNao}" />
+					<t2ti:campoSelect styleClass="t2ti-campo-20"
+						idComponente="empresaEnderecoEntrega" label="Entrega"
+						nomeAtributo="#{empresaController.empresaEndereco.entrega}"
+						itens="#{empresaController.simNao}" />
+					<t2ti:campoSelect styleClass="t2ti-campo-20"
+						idComponente="empresaEnderecoCobranca" label="Cobranca"
+						nomeAtributo="#{empresaController.empresaEndereco.cobranca}"
+						itens="#{empresaController.simNao}" />
+					<t2ti:campoSelect styleClass="t2ti-campo-20"
+						idComponente="empresaEnderecoCorrespondencia"
+						label="Correspondencia"
+						nomeAtributo="#{empresaController.empresaEndereco.correspondencia}"
+						itens="#{empresaController.simNao}" />
+
+				</p:outputPanel>
+				<f:facet name="footer">
+					<p:commandButton value="Salvar"
+						actionListener="#{empresaController.salvarEndereco}"
+						update=":formOutrasTelas2:panelEmpresaEndereco,:form1:growl,:form1:outputPanelDetalhe"
+						oncomplete="if (!args.validationFailed) {PF('dialogEndereco').hide();}" />
+					<p:commandButton value="Cancelar"
+						oncomplete="PF('dialogEndereco').hide();" />
+
+				</f:facet>
+
+			</p:dialog>
+		</h:form>
+
+	</ui:define>
+	
+</ui:composition>

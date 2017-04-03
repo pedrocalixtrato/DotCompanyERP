@@ -46,6 +46,7 @@ public class FuncoesController implements Serializable{
 	private TreeNode rootNfe;
 	private TreeNode rootCadastros;
 	private TreeNode rootVendas;
+	private TreeNode rootCompras;
 	private TreeNode funcaoSelecionada;
 	private String pagina;
 	private String tituloJanela;
@@ -117,6 +118,9 @@ public class FuncoesController implements Serializable{
         new DefaultTreeNode("document", new Funcao("CFOP", "/modulos/cadastros/tabelas/cfop.jsf"), tabelas);
         new DefaultTreeNode("document", new Funcao("Feriados", "/modulos/cadastros/tabelas/feriados.jsf"), tabelas);
         
+        TreeNode empresa = new DefaultTreeNode(new Funcao("Empresa", null), rootCadastros);
+        new DefaultTreeNode("document", new Funcao("Empresa", "/modulos/cadastros/empresa/empresa.jsf"), empresa);
+        
         rootVendas = new DefaultTreeNode("root", null);
         
         TreeNode vendas = new DefaultTreeNode(new Funcao("Vendas", null), rootVendas);
@@ -126,6 +130,17 @@ public class FuncoesController implements Serializable{
         new DefaultTreeNode("document", new Funcao("Venda", "/modulos/vendas/vendaCabecalho.jsf"), vendas);
         new DefaultTreeNode("document", new Funcao("Frete", "/modulos/vendas/vendaFrete.jsf"), vendas);
         new DefaultTreeNode("document", new Funcao("Romaneio de Entrega", "/modulos/vendas/vendaRomaneioEntrega.jsf"), vendas);
+        
+        rootCompras = new DefaultTreeNode("root", null);
+        
+        new DefaultTreeNode("document", new Funcao("Tipo Requisição", "/modulos/compras/compraTipoRequisicao.jsf"), rootCompras);
+        new DefaultTreeNode("document", new Funcao("Tipo Pedido", "/modulos/compras/compraTipoPedido.jsf"), rootCompras);
+        new DefaultTreeNode("document", new Funcao("Requisição", "/modulos/compras/compraRequisicao.jsf"), rootCompras);
+        new DefaultTreeNode("document", new Funcao("Cotação", "/modulos/compras/compraCotacao.jsf"), rootCompras);
+        new DefaultTreeNode("document", new Funcao("Confirma Cotação", "/modulos/compras/compraConfirmaCotacao.jsf"), rootCompras);
+        new DefaultTreeNode("document", new Funcao("Mapa Comparativo", "/modulos/compras/compraMapaComparativo.jsf"), rootCompras);
+        new DefaultTreeNode("document", new Funcao("Pedido", "/modulos/compras/compraPedido.jsf"), rootCompras);
+        new DefaultTreeNode("document", new Funcao("Compra Sugerida", "/modulos/compras/compraSugerida.jsf"), rootCompras);
         
     }  
   
@@ -138,6 +153,9 @@ public class FuncoesController implements Serializable{
 	}
     public TreeNode getRootVendas() {
 		return rootVendas;
+	}
+    public TreeNode getRootCompras() {
+		return rootCompras;
 	}
     
 	public void onNodeSelect(NodeSelectEvent event) {

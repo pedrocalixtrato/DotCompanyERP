@@ -141,7 +141,7 @@ public class Produto implements Serializable {
     @JoinColumn(name = "ID_UNIDADE_PRODUTO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private UnidadeProduto unidadeProduto;
-    @JoinColumn(name = "ID_SUB_GRUPO", referencedColumnName = "ID")
+    @JoinColumn(name = "ID_SUBGRUPO", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private ProdutoSubGrupo produtoSubGrupo;
     @JoinColumn(name = "ID_MARCA_PRODUTO", referencedColumnName = "ID")
