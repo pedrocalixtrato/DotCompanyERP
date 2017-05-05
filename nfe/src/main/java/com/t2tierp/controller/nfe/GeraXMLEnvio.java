@@ -277,9 +277,9 @@ public class GeraXMLEnvio {
 		dest.getEnderDest().setFone(destinatario.getTelefone() == null ? null
 				: destinatario.getTelefone().equals("") ? null : destinatario.getTelefone());
 		if (destinatario.getCpfCnpj().length() == 14) {
-			if (destinatario.getInscricaoEstadual().equals("")) {
-				dest.setIndIEDest("2");
-				// dest.setIE("ISENTO");
+			if (destinatario.getInscricaoEstadual().equals("ISENTO")){
+				dest.setIndIEDest("9");
+				//dest.setIE("");
 			} else {
 				dest.setIndIEDest("1");
 				dest.setIE(destinatario.getInscricaoEstadual());

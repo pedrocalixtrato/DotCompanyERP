@@ -47,6 +47,7 @@ public class FuncoesController implements Serializable{
 	private TreeNode rootCadastros;
 	private TreeNode rootVendas;
 	private TreeNode rootCompras;
+	private TreeNode rootTributacao;
 	private TreeNode funcaoSelecionada;
 	private String pagina;
 	private String tituloJanela;
@@ -142,6 +143,15 @@ public class FuncoesController implements Serializable{
         new DefaultTreeNode("document", new Funcao("Pedido", "/modulos/compras/compraPedido.jsf"), rootCompras);
         new DefaultTreeNode("document", new Funcao("Compra Sugerida", "/modulos/compras/compraSugerida.jsf"), rootCompras);
         
+        rootTributacao = new DefaultTreeNode("root", null);  
+        
+        TreeNode tributacao = new DefaultTreeNode(new Funcao("Tributação", null), rootTributacao);
+        new DefaultTreeNode("document", new Funcao("Operação Fiscal", "/modulos/tributacao/tributOperacaoFiscal.jsf"), tributacao);
+        new DefaultTreeNode("document", new Funcao("Grupo Tributário", "/modulos/tributacao/tributGrupoTributario.jsf"), tributacao);
+        new DefaultTreeNode("document", new Funcao("Configura Tributação", "/modulos/tributacao/tributConfiguraOfGt.jsf"), tributacao);
+        new DefaultTreeNode("document", new Funcao("ICMS Customizado", "/modulos/tributacao/tributIcmsCustomCab.jsf"), tributacao);
+        new DefaultTreeNode("document", new Funcao("ISS - Imposto Sobre Serviços", "/modulos/tributacao/tributIss.jsf"), tributacao);
+        
     }  
   
     public TreeNode getRootNfe() {  
@@ -156,6 +166,10 @@ public class FuncoesController implements Serializable{
 	}
     public TreeNode getRootCompras() {
 		return rootCompras;
+	}
+    
+    public TreeNode getRootTributacao() {
+		return rootTributacao;
 	}
     
 	public void onNodeSelect(NodeSelectEvent event) {

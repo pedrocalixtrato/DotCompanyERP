@@ -28,6 +28,7 @@
 */
 package com.t2tierp.model.bean.tributacao;
 
+import com.t2tierp.model.bean.cadastros.TipoReceitaDipi;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import javax.persistence.Basic;
@@ -38,12 +39,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "TRIBUT_ISS")
-public class TributIss implements Serializable {
+@Table(name = "TRIBUT_IPI_DIPI")
+public class TributIpiDipi implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,6 +53,8 @@ public class TributIss implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Column(name = "CST_IPI")
+    private String cstIpi;
     @Column(name = "MODALIDADE_BASE_CALCULO")
     private String modalidadeBaseCalculo;
     @Column(name = "PORCENTO_BASE_CALCULO")
@@ -63,15 +67,14 @@ public class TributIss implements Serializable {
     private BigDecimal valorPrecoMaximo;
     @Column(name = "VALOR_PAUTA_FISCAL")
     private BigDecimal valorPautaFiscal;
-    @Column(name = "ITEM_LISTA_SERVICO")
-    private Integer itemListaServico;
-    @Column(name = "CODIGO_TRIBUTACAO")
-    private String codigoTributacao;
-    @JoinColumn(name = "ID_TRIBUT_OPERACAO_FISCAL", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private TributOperacaoFiscal tributOperacaoFiscal;
+    @JoinColumn(name = "ID_TIPO_RECEITA_DIPI", referencedColumnName = "ID")
+    @ManyToOne
+    private TipoReceitaDipi tipoReceitaDipi;
+    @JoinColumn(name = "ID_TRIBUT_CONFIGURA_OF_GT", referencedColumnName = "ID")
+    @OneToOne(optional = false)
+    private TributConfiguraOfGt tributConfiguraOfGt;
 
-    public TributIss() {
+    public TributIpiDipi() {
     }
 
     public Integer getId() {
@@ -80,6 +83,14 @@ public class TributIss implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getCstIpi() {
+        return cstIpi;
+    }
+
+    public void setCstIpi(String cstIpi) {
+        this.cstIpi = cstIpi;
     }
 
     public String getModalidadeBaseCalculo() {
@@ -130,33 +141,25 @@ public class TributIss implements Serializable {
         this.valorPautaFiscal = valorPautaFiscal;
     }
 
-    public Integer getItemListaServico() {
-        return itemListaServico;
+    public TipoReceitaDipi getTipoReceitaDipi() {
+        return tipoReceitaDipi;
     }
 
-    public void setItemListaServico(Integer itemListaServico) {
-        this.itemListaServico = itemListaServico;
+    public void setTipoReceitaDipi(TipoReceitaDipi tipoReceitaDipi) {
+        this.tipoReceitaDipi = tipoReceitaDipi;
     }
 
-    public String getCodigoTributacao() {
-        return codigoTributacao;
+    public TributConfiguraOfGt getTributConfiguraOfGt() {
+        return tributConfiguraOfGt;
     }
 
-    public void setCodigoTributacao(String codigoTributacao) {
-        this.codigoTributacao = codigoTributacao;
-    }
-
-    public TributOperacaoFiscal getTributOperacaoFiscal() {
-        return tributOperacaoFiscal;
-    }
-
-    public void setTributOperacaoFiscal(TributOperacaoFiscal tributOperacaoFiscal) {
-        this.tributOperacaoFiscal = tributOperacaoFiscal;
+    public void setTributConfiguraOfGt(TributConfiguraOfGt tributConfiguraOfGt) {
+        this.tributConfiguraOfGt = tributConfiguraOfGt;
     }
 
     @Override
     public String toString() {
-        return "com.t2tierp.model.bean.tributacao.TributIss[id=" + id + "]";
+        return "com.t2tierp.model.bean.tributacao.TributIpiDipi[id=" + id + "]";
     }
 
 }

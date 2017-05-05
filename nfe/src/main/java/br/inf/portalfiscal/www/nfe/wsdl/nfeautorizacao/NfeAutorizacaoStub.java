@@ -118,7 +118,7 @@
      */
     public NfeAutorizacaoStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"https://nfe.sefazvirtual.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx" );
+                    this(configurationContext,"https://nfe.sefaz.go.gov.br/nfe/services/v2/NfeAutorizacao?wsdl" );
                 
     }
 
@@ -127,7 +127,7 @@
      */
     public NfeAutorizacaoStub() throws org.apache.axis2.AxisFault {
         
-                    this("https://nfe.sefazvirtual.rs.gov.br/ws/NfeAutorizacao/NFeAutorizacao.asmx" );
+                    this("https://nfe.sefaz.go.gov.br/nfe/services/v2/NfeAutorizacao?wsdl" );
                 
     }
 

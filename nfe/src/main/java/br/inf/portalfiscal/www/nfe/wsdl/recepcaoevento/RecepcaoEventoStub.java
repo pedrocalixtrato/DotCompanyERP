@@ -106,7 +106,7 @@
      */
     public RecepcaoEventoStub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"https://nfe.sefazvirtual.rs.gov.br/ws/recepcaoevento/recepcaoevento.asmx" );
+                    this(configurationContext,"https://nfe.sefaz.go.gov.br/nfe/services/v2/RecepcaoEvento?wsdl" );
                 
     }
 
@@ -115,7 +115,7 @@
      */
     public RecepcaoEventoStub() throws org.apache.axis2.AxisFault {
         
-                    this("https://nfe.sefazvirtual.rs.gov.br/ws/recepcaoevento/recepcaoevento.asmx" );
+                    this("https://nfe.sefaz.go.gov.br/nfe/services/v2/RecepcaoEvento?wsdl" );
                 
     }
 

@@ -106,7 +106,7 @@
      */
     public NfeStatusServico2Stub(org.apache.axis2.context.ConfigurationContext configurationContext) throws org.apache.axis2.AxisFault {
         
-                    this(configurationContext,"https://homologacao.nfe.sefazvirtual.rs.gov.br/ws/nfeStatusServico/nfeStatusServico2.asmx" );
+                    this(configurationContext,"https://nfe.sefaz.go.gov.br/nfe/services/v2/NfeStatusServico2?wsdl");
                 
     }
 
@@ -115,7 +115,7 @@
      */
     public NfeStatusServico2Stub() throws org.apache.axis2.AxisFault {
         
-                    this("https://homologacao.nfe.sefazvirtual.rs.gov.br/ws/nfeStatusServico/nfeStatusServico2.asmx" );
+                    this("https://nfe.sefaz.go.gov.br/nfe/services/v2/NfeStatusServico2?wsdl");
                 
     }
 

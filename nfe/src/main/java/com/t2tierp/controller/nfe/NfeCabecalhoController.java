@@ -162,6 +162,8 @@ public class NfeCabecalhoController extends AbstractController<NfeCabecalho> imp
 	private InterfaceDAO<NfeDetalhe> nfeDetalheDao;
 	@EJB
 	private InterfaceDAO<Transportadora> transportadoraDao;
+	@EJB
+	private InterfaceDAO<TributIss> tributIssDao;
 
 	private boolean dadosSalvos = false;
 	private String senhaCertificado;
@@ -319,6 +321,8 @@ public class NfeCabecalhoController extends AbstractController<NfeCabecalho> imp
 					respostaSefaz.setResposta((String) mapResposta.get("resposta"));
 					respostaSefaz.setNumeroRecibo((String) mapResposta.get("numeroRecibo"));
 					respostaSefaz.setXmlEnviNfe((String) mapResposta.get("xmlEnviNfe"));
+					
+					System.out.println("Essa é a resposta " + respostaSefaz.getResposta());
 
 					if (autorizado) {
 						String xmlProc = (String) mapResposta.get("xmlProc");

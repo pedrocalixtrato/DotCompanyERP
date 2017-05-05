@@ -115,7 +115,7 @@ public class EnviaNfe {
             recibo = element.getTextContent();
         }
 
-        Thread.sleep(3000);
+        Thread.sleep(6000);
         return consultaEnvioNfe(recibo, xml, codigoUf, ambiente);
     }
 
@@ -176,7 +176,8 @@ public class EnviaNfe {
         String xmlProc = "";
         String xmlNfe = "";
         boolean autorizado = false;
-
+                
+        
         for (int i = 0; i < nodeListMotivo.getLength(); i++) {
             Element element = (Element) nodeListMotivo.item(i);
             respostaSefaz += element.getTextContent() + "\n";

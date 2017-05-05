@@ -44,6 +44,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import com.t2tierp.model.bean.cadastros.Empresa;
 
 
@@ -69,6 +72,7 @@ public class TributOperacaoFiscal implements Serializable {
     @ManyToOne(optional = false)
     private Empresa empresa;
     @OneToMany(mappedBy="tributOperacaoFiscal", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<TributIss> listaIss;
 
     public TributOperacaoFiscal() {

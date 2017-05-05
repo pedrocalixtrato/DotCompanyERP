@@ -38,12 +38,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
 @Entity
-@Table(name = "TRIBUT_ISS")
-public class TributIss implements Serializable {
+@Table(name = "TRIBUT_COFINS_COD_APURACAO")
+public class TributCofinsCodApuracao implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -51,6 +52,10 @@ public class TributIss implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Column(name = "CST_COFINS")
+    private String cstCofins;
+    @Column(name = "EFD_TABELA_435")
+    private String efdTabela435;
     @Column(name = "MODALIDADE_BASE_CALCULO")
     private String modalidadeBaseCalculo;
     @Column(name = "PORCENTO_BASE_CALCULO")
@@ -63,15 +68,11 @@ public class TributIss implements Serializable {
     private BigDecimal valorPrecoMaximo;
     @Column(name = "VALOR_PAUTA_FISCAL")
     private BigDecimal valorPautaFiscal;
-    @Column(name = "ITEM_LISTA_SERVICO")
-    private Integer itemListaServico;
-    @Column(name = "CODIGO_TRIBUTACAO")
-    private String codigoTributacao;
-    @JoinColumn(name = "ID_TRIBUT_OPERACAO_FISCAL", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private TributOperacaoFiscal tributOperacaoFiscal;
+    @JoinColumn(name = "ID_TRIBUT_CONFIGURA_OF_GT", referencedColumnName = "ID")
+    @OneToOne(optional = false)
+    private TributConfiguraOfGt tributConfiguraOfGt;
 
-    public TributIss() {
+    public TributCofinsCodApuracao() {
     }
 
     public Integer getId() {
@@ -80,6 +81,22 @@ public class TributIss implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getCstCofins() {
+        return cstCofins;
+    }
+
+    public void setCstCofins(String cstCofins) {
+        this.cstCofins = cstCofins;
+    }
+
+    public String getEfdTabela435() {
+        return efdTabela435;
+    }
+
+    public void setEfdTabela435(String efdTabela435) {
+        this.efdTabela435 = efdTabela435;
     }
 
     public String getModalidadeBaseCalculo() {
@@ -130,33 +147,17 @@ public class TributIss implements Serializable {
         this.valorPautaFiscal = valorPautaFiscal;
     }
 
-    public Integer getItemListaServico() {
-        return itemListaServico;
+    public TributConfiguraOfGt getTributConfiguraOfGt() {
+        return tributConfiguraOfGt;
     }
 
-    public void setItemListaServico(Integer itemListaServico) {
-        this.itemListaServico = itemListaServico;
-    }
-
-    public String getCodigoTributacao() {
-        return codigoTributacao;
-    }
-
-    public void setCodigoTributacao(String codigoTributacao) {
-        this.codigoTributacao = codigoTributacao;
-    }
-
-    public TributOperacaoFiscal getTributOperacaoFiscal() {
-        return tributOperacaoFiscal;
-    }
-
-    public void setTributOperacaoFiscal(TributOperacaoFiscal tributOperacaoFiscal) {
-        this.tributOperacaoFiscal = tributOperacaoFiscal;
+    public void setTributConfiguraOfGt(TributConfiguraOfGt tributConfiguraOfGt) {
+        this.tributConfiguraOfGt = tributConfiguraOfGt;
     }
 
     @Override
     public String toString() {
-        return "com.t2tierp.model.bean.tributacao.TributIss[id=" + id + "]";
+        return "com.t2tierp.model.bean.tributacao.TributCofinsCodApuracao[id=" + id + "]";
     }
 
 }

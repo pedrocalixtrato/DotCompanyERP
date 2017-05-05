@@ -46,9 +46,9 @@ public class StatusServico {
     public String verificaStatusServico(KeyStore ks, String alias, char[] senha) {
         try {
             String codigoUf = "52";
-            String ambiente = "2";
+            String ambiente = "1";
             String versaoDados = "3.10";
-            String url = "https://homolog.sefaz.go.gov.br/nfe/services/v2/NfeStatusServico2?wsdl";
+            String url = "https://nfe.sefaz.go.gov.br/nfe/services/v2/NfeStatusServico2?wsdl";
 
             //cria o xml de requisicao
             String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"

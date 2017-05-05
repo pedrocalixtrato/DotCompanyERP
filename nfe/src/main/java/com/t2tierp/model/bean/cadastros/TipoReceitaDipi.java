@@ -26,30 +26,21 @@
 * @author Claudio de Barros (T2Ti.com)
 * @version 2.0
 */
-package com.t2tierp.model.bean.tributacao;
+package com.t2tierp.model.bean.cadastros;
 
 import java.io.Serializable;
-import java.util.Set;
-
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.t2tierp.model.bean.cadastros.Empresa;
 
 
 @Entity
-@Table(name = "TRIBUT_ICMS_CUSTOM_CAB")
-public class TributIcmsCustomCab implements Serializable {
+@Table(name = "TIPO_RECEITA_DIPI")
+public class TipoReceitaDipi implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,15 +50,8 @@ public class TributIcmsCustomCab implements Serializable {
     private Integer id;
     @Column(name = "DESCRICAO")
     private String descricao;
-    @Column(name = "ORIGEM_MERCADORIA")
-    private String origemMercadoria;
-    @JoinColumn(name = "ID_EMPRESA", referencedColumnName = "ID")
-    @ManyToOne(optional = false)
-    private Empresa empresa;
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "tributIcmsCustomCab", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<TributIcmsCustomDet> listaTributIcmsCustomDet;
 
-    public TributIcmsCustomCab() {
+    public TipoReceitaDipi() {
     }
 
     public Integer getId() {
@@ -86,33 +70,9 @@ public class TributIcmsCustomCab implements Serializable {
         this.descricao = descricao;
     }
 
-    public String getOrigemMercadoria() {
-        return origemMercadoria;
-    }
-
-    public void setOrigemMercadoria(String origemMercadoria) {
-        this.origemMercadoria = origemMercadoria;
-    }
-
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
-
     @Override
     public String toString() {
-        return "com.t2tierp.model.bean.tributacao.TributIcmsCustomCab[id=" + id + "]";
+        return "com.t2tierp.model.bean.cadastros.TipoReceitaDipi[id=" + id + "]";
     }
-
-	public Set<TributIcmsCustomDet> getListaTributIcmsCustomDet() {
-		return listaTributIcmsCustomDet;
-	}
-
-	public void setListaTributIcmsCustomDet(Set<TributIcmsCustomDet> listaTributIcmsCustomDet) {
-		this.listaTributIcmsCustomDet = listaTributIcmsCustomDet;
-	}
 
 }
